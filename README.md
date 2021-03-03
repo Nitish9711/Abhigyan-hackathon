@@ -16,6 +16,8 @@ https://www.frontendmentor.io/challenges/maker-prelaunch-landing-page-WVZIJtKLd
     save data;
 
 3. price section - integrate with payement gateway
-https://ipinfo.io/
+4. for location https://ipinfo.io/
 
-4.
+4. top reviews
+    if consulted or appointed  - review
+    
