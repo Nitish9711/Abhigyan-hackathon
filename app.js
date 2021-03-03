@@ -7,16 +7,16 @@ const multer = require('multer');
 const passport = require('passport');
 const PassportLocal = require('passport-local');
 const app = express();
+
+
 const Client = require('./models/Client');
 const Lawyer = require('./models/Lawyer');
-
+const authentication = require('./middleware/authentication');
 const clientsRouter = require('./routes/clients');
 const lawyersRouter = require('./routes/lawyers');
-
-mongoose.Schema.Types.String.checkRequired(v => typeof v === 'string');
-
 const errorController  = require('./controllers/error');
 
+mongoose.Schema.Types.String.checkRequired(v => typeof v === 'string');
 
 const databaseUrl = "mongodb+srv://nitish_kumar:1234567890@cluster0.xt7ds.mongodb.net/abhigyan?retryWrites=true&w=majority";
 mongoose
@@ -31,13 +31,10 @@ mongoose
   });
 
 
+
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.set('view engine','ejs');
-app.set('views',path.join(__dirname,'views'));
-app.use(express.static(path.join(__dirname,'public')));
-
-
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -50,6 +47,16 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+
+app.set('view engine','ejs');
+app.set('views',path.join(__dirname,'views'));
+
+
+
+app.use(express.static(path.join(__dirname,'public')));
+app.use("/images",  express.static(path.join("images")));
+
 
 
 app.use(session({
@@ -73,12 +80,25 @@ passport.deserializeUser(function(user,done){
   if(user) done(null,user);
 })
 
-app.use('/api',(req, res, next) =>{
-  res.send("api is working");
+
+
+
+app.get('/',(req,res) => {
+  res.render('landing',{user:req.user});
+})
+
+app.get('/dashboard',authentication.ensureLogin,(req,res) => {
+  res.render('dashboard',{user: req.user});
 })
 
 app.use('/clients',clientsRouter);
 app.use('/lawyers',lawyersRouter);
+app.post('/logout',authentication.ensureLogin,(req,res) => {
+  req.logout();
+  res.redirect('/');
+})
+
+
 
 app.get('/500', errorController.get500);
 app.use(errorController.get404);

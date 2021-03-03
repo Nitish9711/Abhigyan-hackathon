@@ -44,9 +44,9 @@ const clientSchema = new mongoose.Schema({
             required: true
         }
     },
-    Url: {
+    imageUrl: {
         type: String,
-        required: true
+        required: false
     }
 })
 clientSchema.plugin(passportLocalMongoose);

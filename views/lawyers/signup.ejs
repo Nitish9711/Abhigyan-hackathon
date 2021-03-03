@@ -1,0 +1,45 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+   
+    <main>
+        <form action = "/lawyers/signup"  method = "POST">
+            <label for="username">username</label>
+            <input name = "username" type = "text"><br>
+            <label for="password">password</label>
+            <input name = "password" type = "password"><br>
+            <label for="email">email</label>
+            <input name = "email" type = "email"><br>
+            <label for="phone">phone</label>
+            <input name = "phone" type = "number"><br>
+            <label for="name[first]">firstname</label>
+            <input name = "name[first]" type = "text"><br>
+            <label for="name[last]">lastname</label>
+            <input name = "name[last]" type = "text"><br>
+            <label for="gender">gender</label>
+            <input type="radio" name="gender" value="Male"> Male<br>
+            <input type="radio" name="gender" value="Female"> Female<br>
+            <input type="radio" name="gender" value="Other"> Other<br>
+            <label for="address">address</label><br>
+            <input name = "address[house]" type = "text">houseno<br>
+            <input name = "address[locality]" type = "text">locality<br>
+            <input name = "address[city]" type = "text">city<br>
+            <input name = "address[country]" type = "text">country<br>
+            <input name = "aboutMe" type = "text">aboutme<br>
+            <label for="imageUrl">Image</label><br>
+            <input 
+                type="file" 
+                name="imageUrl" 
+                id="image" 
+            >
+            
+
+
+           
+
+            <button type = "submit">SignUp</button>
+        </form>
+        <a href="/">Back</a>
+    </main>
+<%- include('../includes/end.ejs') %>

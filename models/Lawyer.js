@@ -111,7 +111,7 @@ const lawyerSchema = new mongoose.Schema({
     },
     imageUrl: {
         type: String,
-        required: true
+        required: false
     },
     practiceAreas:[{
         area: {
@@ -122,7 +122,8 @@ const lawyerSchema = new mongoose.Schema({
     ],
     clientCount:{
         type:Number,
-        required:true
+        required:true,
+        default :0
     }
 })
 

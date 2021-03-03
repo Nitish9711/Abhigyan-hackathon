@@ -1,0 +1,17 @@
+<%- include('includes/head.ejs') %>
+</head>
+<body>
+    <h1>Landing Page</h1>
+    <% if(user){ %>
+        <a href="/dashboard">Dashboard</a>
+        <form action="/logout" method="POST">
+            <button>Logout</button>
+        </form>
+    <% }else{ %>
+        <a href="/clients/signup">Signup as a client</a>
+        <a href="/lawyers/signup">Signup as a lawyer</a>
+        <br>
+        <a href="/clients/login">Login as a client</a>
+        <a href="/lawyers/login">Login as a lawyer</a>
+    <% } %>
+<%- include('includes/end.ejs') %>
