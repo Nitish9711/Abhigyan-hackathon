@@ -6,6 +6,8 @@ exports.findLawyer = async (req,res,next)=>{
         const lawyer = await Lawyer.findById(req.params.id);
         if(!req.find) req.find = {};
         req.find.lawyer = lawyer;
+        console.log(lawyer);
+
         next();
     }catch(err){
         next(err);
