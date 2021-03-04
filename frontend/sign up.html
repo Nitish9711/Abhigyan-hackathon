@@ -23,8 +23,8 @@
         <ul id="progressbar">
           <li class="active">1. Personal Details</li>
           <li>2. Contact Information</li>
-          <!-- <li>3. Education Details</li> -->
-          <!-- <li>4. Experience</li> -->
+          <li>3. Education and Experience</li>
+          <li>4. Specialization and Court</li>
         </ul>
         <fieldset>
             <h2 class="fs-title">Personal Details</h2>
@@ -70,42 +70,19 @@
             class="previous action-button"
             value="Previous"
           />
-        </fieldset>
-        <!-- <fieldset>
-          <h2 class="fs-title">Education Details</h2>
-          <h3 class="fs-subtitle">Your presence on the social network</h3>
-          <div class="eduDataDiv">
-            <div class="eduData 0" id="education[0]">
-                <input type="text" name="college" placeholder="College" class="educationInput" />
-                <input type="text" name="year of passing" placeholder="Year of passing" class="educationInput"/>
-                <div class="input-group mb-3">
-                  <select class="custom-select" id="inputGroupSelect01">
-                    <option selected>Choose...</option>
-                    <option value="Integrated LLB">Integrated LLb</option>
-                    <option value="LLb">LLB</option>
-                    <option value="LLM">LLM</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-            </div>
-          </div>
-          <span class="addEduBtn">+</span> -->
-          <!-- <input
-            type="button"
-            name="previous"
-            class="previous action-button"
-            value="Previous"
-          />
           <input
-          type="button"
-          name="next"
-          class="next action-button"
-          value="Next"
-        />
+            type="button"
+            name="next"
+            class="next action-button"
+            value="Next"
+          />
         </fieldset>
+
+        <!-- Education and experience -->
         <fieldset>
-            <h2 class="fs-title">Education Details</h2>
-            <h3 class="fs-subtitle">Your presence on the social network</h3>
+          <h2 class="fs-title">Education Details and Experience</h2>
+          <div class="eduMainDiv">
+            <label for="" style="color: #757575;">Education</label>
             <div class="eduDataDiv">
               <div class="eduData 0" id="education[0]">
                   <input type="text" name="college" placeholder="College" class="educationInput" />
@@ -121,8 +98,47 @@
                   </div>
               </div>
             </div>
-            <span class="addEduBtn">+</span> -->
-            <!-- <input
+          </div>
+
+          <div class="expMainDiv">
+            <label for="" style="color: #757575;">Experience</label>
+            <div class="eduDataDiv">
+              <div class="eduData 0" id="education[0]">
+                  <input type="text" name="expType" placeholder="Experience Type" class="educationInput" />
+                  <input type="text" name="years" placeholder="Years of Experience" class="educationInput"/>
+                  <input type="text" name="workPlace" placeholder="Workplace" >
+              </div>
+            </div>
+          </div>
+  
+          <input
+            type="button"
+            name="previous"
+            class="previous action-button"
+            value="Previous"
+          />
+          <input
+            type="button"
+            name="next"
+            class="next action-button"
+            value="Next"
+          />
+        </fieldset>
+        <fieldset>
+            <h2 class="fs-title">Specialization and Court</h2>
+            <div class="eduDataDiv">
+              <div class="eduData 0" id="education[0]" style="justify-content: center; margin-bottom: 10px;">
+                  <input type="text" name="specType" placeholder="Specialization Type" class="educationInput form-control" />
+                  <input type="text" name="courts" placeholder="Court name" class="educationInput form-control"/>
+              </div>
+              <div class="eduData">
+                <input type="text" name="totolCases" placeholder="Total cases" class="educationInput form-control"/>
+                <input type="text" name="wonCases" placeholder="Cases won" class="educationInput form-control"/>
+                <input type="text" name="pendingCases" placeholder="Pending cases" class="educationInput form-control"/>
+              </div>
+            </div>
+            <!-- <span class="addEduBtn">+</span> -->
+            <input
               type="button"
               name="previous"
               class="previous action-button"
@@ -134,7 +150,7 @@
               class="submit action-button"
               value="Submit"
             />
-          </fieldset> -->
+          </fieldset>
       </form>
     </div>
 
@@ -150,6 +166,6 @@
 
 
     <!-- Custom JS -->
-    <script src="/js/sign up.js"></script>
+    <script src="js/sign up.js"></script>
   </body>
 </html>
