@@ -6,13 +6,13 @@ const passport = require('passport');
 const Client = require('../models/Client');
 const multer = require("multer");
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs').promises;
 
 
 exports.signUp =  (req,res,next) => {
     const {password} = req.body;
     const client = new Client(req.body);
-    client.image = `/images/uploads/${req.file.filename}`;
+    if(req.file) client.image = `/images/uploads/${req.file.filename}`;
     Client.register(client,password)
         .then(() => {
             req.login(client,err => {
@@ -21,7 +21,7 @@ exports.signUp =  (req,res,next) => {
             })
         })
         .catch(err => {
-            fs.unlink(`./public//images/uploads/${req.file.filename}`);
+            if(req.file) fs.unlink(`./public/images/uploads/${req.file.filename}`);
             next(err)
         });
 }

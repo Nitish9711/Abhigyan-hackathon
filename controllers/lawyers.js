@@ -6,14 +6,14 @@ const passport = require('passport');
 const Client = require('../models/Lawyer');
 const multer = require("multer");
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs').promises;
 const Lawyer = require('../models/Lawyer');
 
 
 exports.signUp =  (req,res,next) => {
     const {password} = req.body;
     const lawyer = new Lawyer(req.body);
-    lawyer.image = `/images/uploads/${req.file.filename}`;
+    if(req.file) lawyer.image = `/images/uploads/${req.file.filename}`;
     Lawyer.register(lawyer,password)
         .then(() => {
             req.login(lawyer,err => {
@@ -22,7 +22,7 @@ exports.signUp =  (req,res,next) => {
             })
         })
         .catch(err => {
-            fs.unlink(`./public//images/uploads/${req.file.filename}`);
+            if(req.file) fs.unlink(`./public/images/uploads/${req.file.filename}`);
             next(err)
         });
 }
