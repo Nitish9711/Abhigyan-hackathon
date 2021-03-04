@@ -1,36 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const authentication = require('../middleware/authentication');
+const upload = require('../middleware/multer');
 const passport = require('passport');
 const Client = require('../models/Client');
 const multer = require("multer");
+const path = require('path');
 
-const MIME_TYPE_MAP = {
-    "image/png": "png",
-    "image/jpeg": "jpg",
-    "image/jpg": "jpg"
-  };
-  
-  const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      const isValid = MIME_TYPE_MAP[file.mimetype];
-      let error = new Error("Invalid mime type");
-      if (isValid) {
-        error = null;
-      }
-      // console.log(error)
-      cb(error, "images/profile");
-      // cb(error, "backend/images/lectures");
-    },
-    filename: (req, file, cb) => {
-      const name = file.originalname
-        .toLowerCase()
-        .split(" ")
-        .join("-");
-      const ext = MIME_TYPE_MAP[file.mimetype];
-      cb(null, name + "-" + Date.now() + "." + ext);
-    }
-  });
 
 
 router.get('/login',authentication.ensureNoLogin,(req,res) => {
@@ -46,9 +22,16 @@ router.get('/signup',authentication.ensureNoLogin,(req,res) => {
     res.render('clients/signup');
 })
 
-router.post('/signup',authentication.ensureNoLogin, multer({ storage: storage }).single("imagePath"),(req,res,next) => {
+router.post('/signup',authentication.ensureNoLogin, upload.single('image'),async  (req,res,next) => {
     // const url = req.protocol + "://" + req.get("host");
+    const imagePath = path.join(__dirname, '/public/images');
+    if (!req.file) {
+      res.status(401).json({error: 'Please provide an image'});
+    }
+    const filename = await req.file.save(req.file.buffer);
+
     console.log(req.file);
+    console.log(req.body);
     const {password} = req.body;
     const client = new Client(req.body);
     Client.register(client,password)

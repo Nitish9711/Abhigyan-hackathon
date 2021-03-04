@@ -4,7 +4,7 @@
 <body>
    
     <main>
-        <form action = "/clients/signup"  method = "POST">
+        <form action = "/clients/signup"  method = "POST" enctype="multipart/form-data">
             <label for="username">username</label>
             <input name = "username" type = "text"><br>
             <label for="password">password</label>
@@ -30,8 +30,7 @@
             <input 
                 type="file" 
                 name="image" 
-                id="image" 
-            >
+                id="image"/>
 
 
            
