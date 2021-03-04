@@ -22,13 +22,8 @@ router.get('/signup',authentication.ensureNoLogin,(req,res) => {
     res.render('clients/signup');
 })
 
-router.post('/signup',authentication.ensureNoLogin, upload.single('image'),async  (req,res,next) => {
-    // const url = req.protocol + "://" + req.get("host");
-    const imagePath = path.join(__dirname, '/public/images');
-    if (!req.file) {
-      res.status(401).json({error: 'Please provide an image'});
-    }
-    const filename = await req.file.save(req.file.buffer);
+router.post('/signup',authentication.ensureNoLogin,  (req,res,next) => {
+   
 
     console.log(req.file);
     console.log(req.body);
