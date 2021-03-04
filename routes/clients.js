@@ -6,8 +6,10 @@ const passport = require('passport');
 const Client = require('../models/Client');
 const multer = require("multer");
 const path = require('path');
+const fs = require('fs');
+const find = require('../middleware/find');
 
-
+const clientsController = require('../controllers/clients');
 
 router.get('/login',authentication.ensureNoLogin,(req,res) => {
     res.render('clients/login');
@@ -22,21 +24,12 @@ router.get('/signup',authentication.ensureNoLogin,(req,res) => {
     res.render('clients/signup');
 })
 
-router.post('/signup',authentication.ensureNoLogin,  (req,res,next) => {
-   
+router.post('/signup',authentication.ensureNoLogin, upload.single('image'),clientsController.signUp);
 
-    console.log(req.file);
-    console.log(req.body);
-    const {password} = req.body;
-    const client = new Client(req.body);
-    Client.register(client,password)
-        .then(() => {
-            req.login(client,err => {
-                if(err) next(err);
-                else res.redirect('/dashboard');
-            })
-        })
-        .catch(err => next(err));
+router.get('/:id',authentication.ensureLogin,find.findClient,(req,res) => {
+    res.render('clients/show',{clients: req.find.client});
 })
+
+
 
 module.exports = router;

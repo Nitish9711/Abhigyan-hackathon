@@ -62,6 +62,7 @@ const lawyerSchema = new mongoose.Schema({
             required: true
         },
     }],
+    
     experience:[{
         expType:{
             type: String,

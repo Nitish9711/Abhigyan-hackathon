@@ -80,9 +80,6 @@ passport.deserializeUser(function(user,done){
   if(user) done(null,user);
 })
 
-
-
-
 app.get('/',(req,res) => {
   res.render('landing',{user:req.user});
 })
