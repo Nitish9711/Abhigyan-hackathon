@@ -48,7 +48,7 @@ const lawyerSchema = new mongoose.Schema({
         type:String,
         required: true
     },
-    education:[{
+    education:{
         degreeType: {
             type: String,
             required: true
@@ -61,9 +61,9 @@ const lawyerSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-    }],
+    },
     
-    experience:[{
+    experience:{
         expType:{
             type: String,
             required: true
@@ -77,8 +77,8 @@ const lawyerSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-    }],
-    specialization:[
+    },
+    specialization:
         {
             specType:   {
                 type: String,
@@ -97,14 +97,14 @@ const lawyerSchema = new mongoose.Schema({
                 required: true
             }
         }
-    ],
+    ,
    
-    courts: [
+    courts: 
         {
             type:String,
-            requied: true
+            required: true
         }
-    ],
+    ,
     verified: {
         type:Boolean,
         required: true,
@@ -114,9 +114,9 @@ const lawyerSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    practiceAreas:[{
+    practiceAreas:{
         type:String
-    }],
+    },
     clientCount:{
         type:Number,
         required:true,

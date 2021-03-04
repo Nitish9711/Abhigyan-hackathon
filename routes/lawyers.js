@@ -42,8 +42,8 @@ router.post('/search',authentication.ensureLogin,async (req,res) => {
     try{
         const filter = {};
         if(req.body.city && req.body.city!=='None') filter.city = req.body.city;
-        if(req.body.practiceAreas && req.body.practiceAreas!=='None') filter.practiceAreas = {$in: [req.body.practiceAreas]};
-        if(req.body.courts && req.body.courts!=='None') filter.courts = {$in: [req.body.courts]};
+        if(req.body.practiceAreas && req.body.practiceAreas!=='None') filter.practiceAreas = req.body.practiceAreas;
+        if(req.body.courts && req.body.courts!=='None') filter.courts = req.body.courts;
         if(req.body.gender && req.body.gender!=='None') filter.gender = req.body.gender;
         //TODO: rating filter
         // if(req.body.rating && req.body.rating!=='None' && parseInt(req.body.rating)!==NaN){

@@ -11,6 +11,7 @@ const Lawyer = require('../models/Lawyer');
 
 
 exports.signUp =  (req,res,next) => {
+    console.log(req.body);
     const {password} = req.body;
     const lawyer = new Lawyer(req.body);
     if(req.file) lawyer.image = `/images/uploads/${req.file.filename}`;
