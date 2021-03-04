@@ -6,7 +6,7 @@ const passport = require('passport');
 const Client = require('../models/Lawyer');
 const multer = require("multer");
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs').promises;
 const Lawyer = require('../models/Lawyer');
 
 

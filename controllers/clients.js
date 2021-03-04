@@ -6,7 +6,7 @@ const passport = require('passport');
 const Client = require('../models/Client');
 const multer = require("multer");
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs').promises;
 
 
 exports.signUp =  (req,res,next) => {
