@@ -84,9 +84,7 @@ app.get('/',(req,res) => {
   res.render('landing',{user:req.user});
 })
 
-app.get('/dashboard',authentication.ensureLogin,(req,res) => {
-  res.render('dashboard',{user: req.user});
-})
+
 
 app.use('/clients',clientsRouter);
 app.use('/lawyers',lawyersRouter);

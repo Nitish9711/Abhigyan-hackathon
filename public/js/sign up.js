@@ -63,9 +63,7 @@ $(function () {
     );
   });
 
-  $(".submit").click(function () {
-    return false;
-  });
+ 
 });
 
 $(".addEduBtn").click(function () {

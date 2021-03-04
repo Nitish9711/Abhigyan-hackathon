@@ -115,12 +115,8 @@ const lawyerSchema = new mongoose.Schema({
         required: false
     },
     practiceAreas:[{
-        area: {
-            type:String,
-            requied: true
-        }
-    }
-    ],
+        type:String
+    }],
     clientCount:{
         type:Number,
         required:true,

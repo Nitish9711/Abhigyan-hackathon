@@ -17,8 +17,13 @@ router.get('/login',authentication.ensureNoLogin,(req,res) => {
 
 router.post('/login',authentication.ensureNoLogin,passport.authenticate('clientLocal',{failureRedirect: '/clients/login'}),(req,res) => {
     console.log(req.body);
-    res.redirect('/dashboard');
+    res.redirect('/clients/dashboard');
 })
+
+router.get('/dashboard',authentication.ensureLogin,(req,res) => {
+    res.render('clients/dashboard',{user: req.user});
+  })
+
 
 router.get('/signup',authentication.ensureNoLogin,(req,res) => {
     res.render('clients/signup');
@@ -27,7 +32,7 @@ router.get('/signup',authentication.ensureNoLogin,(req,res) => {
 router.post('/signup',authentication.ensureNoLogin, upload.single('image'),clientsController.signUp);
 
 router.get('/:id',authentication.ensureLogin,find.findClient,(req,res) => {
-    res.render('clients/show',{clients: req.find.client});
+    res.render('clients/profile',{clients: req.find.client});
 })
 
 
