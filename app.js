@@ -90,6 +90,30 @@ app.get('/',authorization.identifyUserType,(req,res) => {
   res.render('landing',local);
 })
 
+app.get('/pricing',authorization.identifyUserType,(req,res) => {
+  const local = {
+    user: req.user
+  }
+  if(req.find && req.find.type) local.type = req.find.type;
+  res.render('pricing',local);
+})
+
+app.get('/about',authorization.identifyUserType,(req,res) => {
+  const local = {
+    user: req.user
+  }
+  if(req.find && req.find.type) local.type = req.find.type;
+  res.render('about',local);
+})
+app.get('/contact',authorization.identifyUserType,(req,res) => {
+  const local = {
+    user: req.user
+  }
+  if(req.find && req.find.type) local.type = req.find.type;
+  res.render('contact',local);
+})
+
+
 
 
 app.use('/clients',clientsRouter);

@@ -1,11 +1,52 @@
-<%- include('../includes/head.ejs') %>
-</head>
-<body>
-    <h1>Dashboard</h1>
+<%- include('header') %>
 
-    <a href="/lawyers/<%= user._id %>">text</a>
-    <form action="/logout" method="POST">
-        <p><%= user._id %></p>
-        <button type = "submit">Logout</button>
-    </form>
-<%- include('../includes/end.ejs') %>
+
+<header>
+    <div class="logo">Xero<span>Source</span></div>
+</header>
+<div class="nav-btn">Menu</div>
+<div class="container">
+    
+    <div class="sidebar">
+        <nav>
+            <a href="#">Xero<span>Source</span></a>
+            <ul>
+                <li class="active"><a href="#">Dashboard</a></li>
+                <li><a href="#">Followers</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Social</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <h1>Dashboard</h1>
+        <p>Here you can stuff!</p>
+        <div class="panel-wrapper">
+            <div class="panel-head">
+                News
+            </div>
+            <div class="panel-body">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam fugiat culpa quia possimus molestiae id sapiente ad eveniet, aliquid, eum sint fuga eius, ratione suscipit ut minus voluptates dicta nesciunt.
+            </div>
+        </div>
+        <div class="panel-wrapper">
+            <div class="panel-head">
+                News
+            </div>
+            <div class="panel-body">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam fugiat culpa quia possimus molestiae id sapiente ad eveniet, aliquid, eum sint fuga eius, ratione suscipit ut minus voluptates dicta nesciunt.
+            </div>
+        </div>
+        <div class="panel-wrapper">
+            <div class="panel-head">
+                News
+            </div>
+            <div class="panel-body">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam fugiat culpa quia possimus molestiae id sapiente ad eveniet, aliquid, eum sint fuga eius, ratione suscipit ut minus voluptates dicta nesciunt. Totam fugiat culpa quia possimus molestiae id sapiente ad eveniet, aliquid, eum sint fuga eius, ratione suscipit ut minus voluptates dicta nesciunt.
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('footer') %>
