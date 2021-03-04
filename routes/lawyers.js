@@ -37,12 +37,25 @@ router.post('/search',authentication.ensureLogin,async (req,res) => {
     try{
         const filter = {};
         if(req.body.city && req.body.city!=='None') filter.city = req.body.city;
-        if(req.body.practiceAreas && req.body.practiceAreas!=='None') filter.practiceAreas = req.body.practiceAreas;
-        if(req.body.courts && req.body.courts!=='None') filter.courts = req.body.courts;
+        if(req.body.practiceAreas && req.body.practiceAreas!=='None') filter.practiceAreas = {$in: [req.body.practiceAreas]};
+        if(req.body.courts && req.body.courts!=='None') filter.courts = {$in: [req.body.courts]};
         if(req.body.gender && req.body.gender!=='None') filter.gender = req.body.gender;
-        if(req.body.rating && req.body.rating!=='None' && parseInt(req.body.rating)!==NaN) filter.rating = {$gte: parseInt(req.body.rating)};
+        //TODO: rating left
+        // if(req.body.rating && req.body.rating!=='None' && parseInt(req.body.rating)!==NaN){
+        //     // filter.rating = {$gte: parseInt(req.body.rating)};
+        // }
 
         const lawyers = await Lawyer.find(filter);
+        if(req.body.experience && req.body.experience!=='None'){
+            for(let i=0;i<lawyers.length;i++){
+                let sum=0;
+                for(const exp of lawyer[i].experience) sum+=exp.years;
+                if(sum<req.body.experience){
+                    lawyers.splice(i,1);
+                    i--;
+                }
+            }
+        }
         res.send(lawyers);
     }catch(err){
         res.send([]);
