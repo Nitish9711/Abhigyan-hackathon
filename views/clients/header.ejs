@@ -47,28 +47,32 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="/clients/dashboard">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">Find a Lawyer</a></li>
+          <li><a class="nav-link scrollto" href="/clients/search">Find a Lawyer</a></li>
         
-          <li><a class=" nav-link scrollto" href="#services">Get a advice</a></li>
-          <li><a class=" nav-link scrollto" href="#portfolio">Events</a></li>
+          <li><a class=" nav-link scrollto" href="#">Get a advice</a></li>
+          <li><a class=" nav-link scrollto" href="/contactUs">Contact Us</a></li>
           <!-- <li><a class="nav-link scrollto" href="/clients/profile">My profile</a></li> -->
             <li>
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     My profile
                   </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <img class="dropdown-menu"  src = "<%= user.image %>">
-                    <a class="dropdown-item" href="/clients/<%= user._id %>">profile</a>
-                    <form action="/logout" method="POST">
-                        <button  class="dropdown-item" type = "submit">Logout</button>
-                    </form>
-                  </div>
+                  <div style="text-align: center;" class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                    <img class="profile"  src = "<%= user.image %>">
+                    <a class="dropdown-item" href="/clients/<%= user._id %>"><%= user.name["first"] %></a>
+                    
+                      <a class="dropdown-item" href="/clients/<%= user._id %>">profile</a>
+                      <form  action="/logout" method="POST">
+                        <button   class="dropdown-item" type = "submit">Logout</button>
+                        </form>
+                </div>
             </li>
-
-
+            
+            
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+    </nav><!-- .navbar -->
+  
 
     </div>
   </header><!-- End Header -->
