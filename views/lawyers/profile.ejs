@@ -1,0 +1,8 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <h1><%= lawyer.name.first %> <%=lawyer.name.last%></h1>
+    <a href="/lawyers/dashboard">Back</a>
+    <img id = "profile" src = "<%=lawyer.image%>">
+    <p>it is lawyer show time</p>
+<%- include('../includes/end.ejs') %>

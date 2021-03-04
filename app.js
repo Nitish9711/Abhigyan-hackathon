@@ -16,6 +16,8 @@ const clientsRouter = require('./routes/clients');
 const lawyersRouter = require('./routes/lawyers');
 const errorController  = require('./controllers/error');
 
+const authorization = require('./middleware/authorization');
+
 mongoose.Schema.Types.String.checkRequired(v => typeof v === 'string');
 
 const databaseUrl = "mongodb+srv://nitish_kumar:1234567890@cluster0.xt7ds.mongodb.net/abhigyan?retryWrites=true&w=majority";
@@ -80,8 +82,12 @@ passport.deserializeUser(function(user,done){
   if(user) done(null,user);
 })
 
-app.get('/',(req,res) => {
-  res.render('landing',{user:req.user});
+app.get('/',authorization.identifyUserType,(req,res) => {
+  const local = {
+    user: req.user
+  }
+  if(req.find && req.find.type) local.type = req.find.type;
+  res.render('landing',local);
 })
 
 

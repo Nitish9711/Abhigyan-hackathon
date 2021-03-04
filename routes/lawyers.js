@@ -14,7 +14,7 @@ router.get('/login',(req,res) => {
 })
 
 router.post('/login',authentication.ensureNoLogin,passport.authenticate('lawyerLocal',{failureRedirect: '/lawyers/login'}),(req,res) => {
-    res.redirect('/dashboard');
+    res.redirect('/lawyers/dashboard');
 })
 
 router.get('/signup',authentication.ensureNoLogin,(req,res) => {
@@ -24,8 +24,13 @@ router.get('/signup',authentication.ensureNoLogin,(req,res) => {
 
 router.post('/signup',authentication.ensureNoLogin, upload.single('image'),lawyersController.signUp);
 
+
+router.get('/dashboard',authentication.ensureLogin,(req,res) => {
+    res.render('lawyers/dashboard',{user: req.user});
+  })
+
 router.get('/:id',authentication.ensureLogin,find.findLawyer,(req,res) => {
-    res.render('lawyers/show',{lawyer: req.find.lawyer});
+    res.render('lawyers/profile',{lawyer: req.find.lawyer});
 })
 
 router.get('/',authentication.ensureLogin,(req,res) => {
@@ -37,12 +42,39 @@ router.post('/search',authentication.ensureLogin,async (req,res) => {
     try{
         const filter = {};
         if(req.body.city && req.body.city!=='None') filter.city = req.body.city;
-        if(req.body.practiceAreas && req.body.practiceAreas!=='None') filter.practiceAreas = req.body.practiceAreas;
-        if(req.body.courts && req.body.courts!=='None') filter.courts = req.body.courts;
+        if(req.body.practiceAreas && req.body.practiceAreas!=='None') filter.practiceAreas = {$in: [req.body.practiceAreas]};
+        if(req.body.courts && req.body.courts!=='None') filter.courts = {$in: [req.body.courts]};
         if(req.body.gender && req.body.gender!=='None') filter.gender = req.body.gender;
-        if(req.body.rating && req.body.rating!=='None' && parseInt(req.body.rating)!==NaN) filter.rating = {$gte: parseInt(req.body.rating)};
+        //TODO: rating filter
+        // if(req.body.rating && req.body.rating!=='None' && parseInt(req.body.rating)!==NaN){
+        //     // filter.rating = {$gte: parseInt(req.body.rating)};
+        // }
 
         const lawyers = await Lawyer.find(filter);
+        if(req.body.experience && req.body.experience!=='None'){
+            for(let i=0;i<lawyers.length;i++){
+                let sum=0;
+                for(const exp of lawyer[i].experience) sum+=exp.years;
+                if(sum<req.body.experience){
+                    lawyers.splice(i,1);
+                    i--;
+                }
+            }
+        }
+
+        if(req.body.sort && req.body.sort === 'experience'){
+            lawyers.sort(function (a,b){
+                let expA=0, expB=0;
+                for(const exp of a.experience) expA+=exp.years;
+                for(const exp of b.experience) expB+=exp.years;
+                if(expA>expB) return -1;
+                else if(expA===expB) return 0;
+                else return 1;
+            })
+        }
+
+        //TODO: rating sort
+
         res.send(lawyers);
     }catch(err){
         res.send([]);

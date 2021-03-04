@@ -72,7 +72,11 @@ crossorigin="anonymous"
               <p class="navbarTxt">
                 <!-- <a href="#">Sign In</a> | <a href="sign up.html">Register</a> -->
                 <% if(user){ %>
-                    <a href="/dashboard">Dashboard</a>
+                  <% if(type==='client'){ %>
+                    <a href="clients/dashboard">Dashboard</a>
+                  <% }else{ %>
+                    <a href="lawyers/dashboard">Dashboard</a>
+                  <% } %>
                     <form action="/logout" method="POST">
                         <button>Logout</button>
                     </form>
