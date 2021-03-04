@@ -1,0 +1,13 @@
+.findLawyerCard {
+    margin-top: 7%;
+    width: 30%;
+    padding: 15px;
+}
+
+.findLawyerCard select {
+    margin: 10px 0;
+}
+
+.findLawyerCard .btn {
+    margin: 10px 0;
+}

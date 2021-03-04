@@ -26,7 +26,7 @@ router.get('/dashboard',authentication.ensureLogin,(req,res) => {
 
 
 router.get('/search',authentication.ensureLogin,(req,res) => {
-    res.render('clients/findLawyer');
+    res.render('clients/findLawyer',{user: req.user});
 })
 router.get('/signup',authentication.ensureNoLogin,(req,res) => {
     res.render('clients/signup');
