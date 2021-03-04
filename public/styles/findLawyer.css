@@ -1,7 +1,11 @@
 .findLawyerCard {
     margin-top: 7%;
-    width: 30%;
+    width: 100%;
     padding: 15px;
+}
+
+.row {
+    margin: 10% 0 0;
 }
 
 .findLawyerCard select {
