@@ -4,7 +4,7 @@
 <body>
    
     <main>
-        <form action = "/lawyers/signup"  method = "POST">
+        <form action = "/lawyers/signup"  method = "POST"  enctype="multipart/form-data">
             <label for="username">username</label>
             <input name = "username" type = "text"><br>
             <label for="password">password</label>
@@ -29,10 +29,10 @@
             <input name = "aboutMe" type = "text">aboutme<br>
             <label for="imageUrl">Image</label><br>
             <input 
-                type="file" 
-                name="imageUrl" 
-                id="image" 
-            >
+            type="file" 
+            name="image" 
+            id="image"/>
+
             
 
 

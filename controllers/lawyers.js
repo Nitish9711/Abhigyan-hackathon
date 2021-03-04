@@ -13,7 +13,7 @@ const Lawyer = require('../models/Lawyer');
 exports.signUp =  (req,res,next) => {
     const {password} = req.body;
     const lawyer = new Lawyer(req.body);
-    client.image = `/images/uploads/${req.file.filename}`;
+    lawyer.image = `/images/uploads/${req.file.filename}`;
     Lawyer.register(lawyer,password)
         .then(() => {
             req.login(lawyer,err => {

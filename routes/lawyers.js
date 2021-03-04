@@ -5,6 +5,7 @@ const authorization = require('../middleware/authorization');
 const find = require('../middleware/find');
 const passport = require('passport');
 const Lawyer = require('../models/Lawyer');
+const upload = require('../middleware/multer');
 
 const lawyersController = require('../controllers/lawyers');
 
@@ -20,7 +21,8 @@ router.get('/signup',authentication.ensureNoLogin,(req,res) => {
     res.render('lawyers/signup');
 })
 
-router.post('/signup',authentication.ensureNoLogin,lawyersController.signUp);
+
+router.post('/signup',authentication.ensureNoLogin, upload.single('image'),lawyersController.signUp);
 
 router.get('/:id',authentication.ensureLogin,find.findLawyer,(req,res) => {
     res.render('lawyers/show',{lawyer: req.find.lawyer});
