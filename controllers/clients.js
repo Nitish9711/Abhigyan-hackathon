@@ -17,7 +17,7 @@ exports.signUp =  (req,res,next) => {
         .then(() => {
             req.login(client,err => {
                 if(err) next(err);
-                else res.redirect('/dashboard');
+                else res.redirect('/clients/dashboard');
             })
         })
         .catch(err => {

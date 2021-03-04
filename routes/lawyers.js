@@ -36,10 +36,11 @@ router.get('/',authentication.ensureLogin,(req,res) => {
 router.post('/search',authentication.ensureLogin,async (req,res) => {
     try{
         const filter = {};
-        if(req.body.city && req.body.city!=='None') filter.city = city;
-        if(req.body.practiceAreas && req.body.practiceAreas!=='None') filter.practiceAreas = practiceAreas;
-        if(req.body.courts && req.body.courts!=='None') filter.courts = courts;
-        if(req.body.rating && req.body.rating!=='None') filter.rating = rating;
+        if(req.body.city && req.body.city!=='None') filter.city = req.body.city;
+        if(req.body.practiceAreas && req.body.practiceAreas!=='None') filter.practiceAreas = req.body.practiceAreas;
+        if(req.body.courts && req.body.courts!=='None') filter.courts = req.body.courts;
+        if(req.body.gender && req.body.gender!=='None') filter.gender = req.body.gender;
+        if(req.body.rating && req.body.rating!=='None' && parseInt(req.body.rating)!==NaN) filter.rating = {$gte: parseInt(req.body.rating)};
 
         const lawyers = await Lawyer.find(filter);
         res.send(lawyers);
