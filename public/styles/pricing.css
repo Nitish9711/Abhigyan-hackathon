@@ -77,6 +77,17 @@ main {
     background-color: #36536b;
 }
 
+.ready-to-start-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 100px 0;
+}
+
+.ready-to-start-container .ctaRow {
+    width: 40%;
+}
+
 @media screen and (max-width: 1040px) {
     body {
         background-position: calc(50% + 500px) -500px;
