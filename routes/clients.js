@@ -4,6 +4,7 @@ const authentication = require('../middleware/authentication');
 const upload = require('../middleware/multer');
 const passport = require('passport');
 const Client = require('../models/Client');
+const Appoitnment = require('../models/Appointment');
 const multer = require("multer");
 const path = require('path');
 const fs = require('fs');
@@ -37,6 +38,17 @@ router.post('/signup',authentication.ensureNoLogin, upload.single('image'),clien
 router.get('/:id',authentication.ensureLogin,find.findClient,(req,res) => {
     res.render('clients/profile',{clients: req.find.client});
 })
+
+router.get('/bookAppointment', authentication.ensureLogin, (req, res) =>{
+    lawyer_Id = req.body.lawyerId;
+    client_Id = req.userId;
+    var temp =  Appointment.findby({lawyerId:lawyer_Id});
+    if(temp == None){      
+        Appoitnment.save()
+    } 
+    
+
+});
 
 
 
