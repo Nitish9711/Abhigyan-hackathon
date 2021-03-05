@@ -39,47 +39,55 @@ router.get('/',authentication.ensureLogin,(req,res) => {
 
 
 router.post('/search',authentication.ensureLogin,async (req,res) => {
-    try{
-        const filter = {};
-        if(req.body.city && req.body.city!=='None') filter.city = req.body.city;
-        if(req.body.practiceAreas && req.body.practiceAreas!=='None') filter.practiceAreas = req.body.practiceAreas;
-        if(req.body.courts && req.body.courts!=='None') filter.courts = req.body.courts;
-        if(req.body.gender && req.body.gender!=='None') filter.gender = req.body.gender;
-        //TODO: rating filter
-        // if(req.body.rating && req.body.rating!=='None' && parseInt(req.body.rating)!==NaN){
-        //     // filter.rating = {$gte: parseInt(req.body.rating)};
-        // }
 
-        const lawyers = await Lawyer.find(filter);
-        if(req.body.experience && req.body.experience!=='None'){
-            for(let i=0;i<lawyers.length;i++){
-                let sum=0;
-                for(const exp of lawyer[i].experience) sum+=exp.years;
-                if(sum<req.body.experience){
-                    lawyers.splice(i,1);
-                    i--;
-                }
-            }
+    Lawyer.find().then(lawyer => {
+        if (lawyer) {
+          res.status(200).json(lawyer);
         }
+      });
 
-        if(req.body.sort && req.body.sort === 'experience'){
-            lawyers.sort(function (a,b){
-                let expA=0, expB=0;
-                for(const exp of a.experience) expA+=exp.years;
-                for(const exp of b.experience) expB+=exp.years;
-                if(expA>expB) return -1;
-                else if(expA===expB) return 0;
-                else return 1;
-            })
-        }
+    // try{
+    //     const filter = {};
+    //     if(req.body.city && req.body.city!=='None') filter.city = req.body.city;
+    //     if(req.body.practiceAreas && req.body.practiceAreas!=='None') filter.practiceAreas = req.body.practiceAreas;
+    //     if(req.body.courts && req.body.courts!=='None') filter.courts = req.body.courts;
+    //     if(req.body.gender && req.body.gender!=='None') filter.gender = req.body.gender;
+    //     //TODO: rating filter
+    //     // if(req.body.rating && req.body.rating!=='None' && parseInt(req.body.rating)!==NaN){
+    //     //     // filter.rating = {$gte: parseInt(req.body.rating)};
+    //     // }
 
-        //TODO: rating sort
+    //     const lawyers = await Lawyer.find(filter);
+    //     if(req.body.experience && req.body.experience!=='None'){
+    //         for(let i=0;i<lawyers.length;i++){
+    //             let sum=0;
+    //             for(const exp of lawyer[i].experience) sum+=exp.years;
+    //             if(sum<req.body.experience){
+    //                 lawyers.splice(i,1);
+    //                 i--;
+    //             }
+    //         }
+    //     }
 
-        res.send(lawyers);
-    }catch(err){
-        res.send([]);
-    }
+    //     if(req.body.sort && req.body.sort === 'experience'){
+    //         lawyers.sort(function (a,b){
+    //             let expA=0, expB=0;
+    //             for(const exp of a.experience) expA+=exp.years;
+    //             for(const exp of b.experience) expB+=exp.years;
+    //             if(expA>expB) return -1;
+    //             else if(expA===expB) return 0;
+    //             else return 1;
+    //         })
+    //     }
+
+    //     //TODO: rating sort
+    //     console.log(lawyers);
+    //     res.send(lawyers);
+    // }catch(err){
+    //     res.send([]);
+    // }
 })
+
 
 
 module.exports = router;

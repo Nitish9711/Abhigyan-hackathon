@@ -29,15 +29,13 @@ exports.signUp =  (req,res,next) => {
 }
 
 exports.getLawyer =  (req, res, next) => {
-    Lawyer.findById(req.params.id).then(lawyer => {
+    Lawyer.find().then(lawyer => {
         if (lawyer) {
           res.status(200).json(lawyer);
-        } else {
-          res.status(404).json({ message: "Post not found!" });
-        }
-      });
+       
+    }});
   
-  };
+  }
 
   
   
