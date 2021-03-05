@@ -8,13 +8,14 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/styles/findLawyer.css">
+    <link rel="stylesheet" href="/css/lawyerCard.css">
 
     <body>
         
         <main>
             <div class="row">
                 <div class="col-4">
-                    <form action="/lawyers/search" method="POST">
+                    <form action="/lawyers/search" method="POST" id="search-form">
                         <div class="card findLawyerCard">
                             <a href="/">Home</a>
                             <h2>Search</h2>
@@ -82,14 +83,8 @@
                     </p>
 
                     <div class="container">
-                        <div class="row">
-                          <div class="col-sm">
-                            first column
-                          </div>
-                         
-                          <div class="col-sm">
-                            second column
-                          </div>
+                        <div class="row" id="lawyer-card-container">
+
                         </div>
                       </div>
                 </div>
@@ -101,6 +96,107 @@
 
            
         </main>
+        <script>
+            const lawyerCardContainer = document.getElementById('lawyer-card-container');
+            const searchForm = document.getElementById('search-form');
+
+            const city = document.getElementById('city');
+            const practiceAreas = document.getElementById('practiceAreas');
+            const courts = document.getElementById('courts');
+            const experience = document.getElementById('experience');
+            const gender = document.getElementById('gender');
+            const rating = document.getElementById('rating');
+            const sort = document.getElementById('sort');
+
+            async function searchRequest(){
+                const res = await fetch('/lawyers/search',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `city=${city.value}&practiceAreas=${practiceAreas.value}&courts=${courts.value}&experience=${experience.value}&gender=${gender.value}&rating=${rating.value}&sort=${sort.value}&`
+                });
+                return res.json();
+            }
+
+            async function addCard(data){
+                const div = document.createElement('div');
+                div.classList.add('col-md-4','col-sm-6');
+                div.innerHTML = `
+                    <div class="card-container" style="overflow: hidden">
+			            <div class="card">
+			                <div class="front">
+				                <div class="cover">
+				                    <img src="https://i.imgur.com/qBVZVSf.png" alt="">
+				                </div>
+				                <div class="user">
+				                    <img class ="img-circle" src="${data.image}" alt="">
+				                </div>
+				                <div class="content">
+				                    <div class="main">
+					                    <h3 class="name">${data.name.first} ${data.name.last}</h3>
+					                    <p class="profession">${data.practiceAreas}</p>
+					                    <!-- <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span> -->
+					                    <p class="text-center">${data.aboutMe}</p>
+				                    </div>
+				                    <div class="footer">
+					                    <div class="rating">
+					                        <i class="fa fa-reply"></i> View Profile
+					                    </div>
+				                    </div>
+				                </div>
+			                </div>
+			                <div class="back">
+				                <!-- <div class="header">
+				                    <h5 class="motto">"Lorem Ipsum is simply dummy text of the printing"</h5>
+				                </div> -->
+				                <div class="content">
+				                    <div class="main">
+					                    <h4 class="text-center">${data.name.first} ${data.name.last}</h4>
+					                    <p class="text-center">
+                                            <h5>Education</h5>
+                                            <p>
+                                                ${data.education.institutionName} - ${data.education.degreeType} - ${data.education.completed}
+                                            </p>
+                                            <h5>Experience</h5>
+                                            <p>
+                                                ${data.experience.workPlace} - ${data.experience.expType} - ${data.experience.years}
+                                            </p>
+                                        </p>
+					                    <div class="stats-container">
+					                        <div class="stats">
+						                        <h4>${data.specialization.wonCases}</h4>
+						                        <p>Suc</p>
+					                        </div>
+					                        <div class="stats">
+						                        <h4>${data.specialization.totalCases-data.specialization.wonCases-data.specialization.pendingCases}</h4>
+						                        <p>lost</p>
+					                        </div>
+					                        <div class="stats">
+						                        <h4>${data.specialization.totalCases}</h4>
+						                        <p>cases</p>
+					                        </div>
+					                    </div>
+				                    </div>
+				                </div>
+			                </div>
+			            </div>
+		            </div>`;
+                lawyerCardContainer.append(div);
+            }
+
+            searchForm.addEventListener('submit',async function(e){
+                e.preventDefault();
+                lawyerCardContainer.innerHTML = '';
+                const data = await searchRequest();
+                console.log(data);
+                for(const x of data) addCard(x);
+            })
+        </script>
         <!-- Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
