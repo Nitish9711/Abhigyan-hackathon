@@ -5,6 +5,7 @@ const authorization = require('../middleware/authorization');
 const find = require('../middleware/find');
 const passport = require('passport');
 const Lawyer = require('../models/Lawyer');
+const Appointment = require('../models/Appointment');
 const upload = require('../middleware/multer');
 
 const lawyersController = require('../controllers/lawyers');
@@ -36,7 +37,6 @@ router.get('/:id',authentication.ensureLogin,find.findLawyer,(req,res) => {
 router.get('/',authentication.ensureLogin,(req,res) => {
     res.render('lawyers/index');
 })
-
 
 router.post('/search',authentication.ensureLogin,async (req,res) => {
 
@@ -87,6 +87,19 @@ router.post('/search',authentication.ensureLogin,async (req,res) => {
     }
 })
 
-
+router.post('/:id',authentication.ensureLogin,find.findLawyer,authorization.ensureClient,async (req,res) => {
+    try{
+        const appointment = new Appointment({
+            lawyerId: req.params.id,
+            clientId: req.user._id
+        });
+        await appointment.save();
+        req.find.lawyer.appointments.push(appointment);
+        await req.find.lawyer.save();
+        res.redirect(`/lawyers/${req.params.id}`);
+    }catch(err){
+        next(err);
+    }
+})
 
 module.exports = router;
