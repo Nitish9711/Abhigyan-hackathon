@@ -22,6 +22,7 @@ router.get('/signup',authentication.ensureNoLogin,(req,res) => {
     res.render('lawyers/signup');
 })
 
+// router.get('/appointments',authentication.ensureLogin,authorization)
 
 router.post('/signup',authentication.ensureNoLogin, upload.single('image'),lawyersController.signUp);
 
