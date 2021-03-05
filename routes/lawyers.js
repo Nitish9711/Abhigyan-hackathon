@@ -24,10 +24,12 @@ router.get('/signup',authentication.ensureNoLogin,(req,res) => {
 
 router.get('/appointments',authentication.ensureLogin,authorization.ensureLawyer,async (req,res,next) => {
     try{
-        console.log(req.user);
-        console.log(req.user instanceof User);
-        await req.user.populate('appointments').execPopulate();
-        res.render('lawyers/appointments',{user: req.user});
+        const appointments = [];
+        for(const id of req.user.appointments){
+            const x = await Appointment.findById(id);
+            appointments.push(x);
+        }
+        res.render('lawyers/appointments',{user: req.user, appointments});
     }catch(err){
         next(err);
     }
