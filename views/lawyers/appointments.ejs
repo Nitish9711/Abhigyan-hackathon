@@ -1,0 +1,10 @@
+<%- include('header') %>
+    <ul>
+        <% for(const appointment of user.appointments){ %>
+            <li>
+                clientId: <%=appointment.clientId>
+                isCompleted: <%=appointment.isCompleted>
+            </li>
+        <% } %>
+    </ul>
+<%- include('footer') %>

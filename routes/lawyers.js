@@ -22,7 +22,14 @@ router.get('/signup',authentication.ensureNoLogin,(req,res) => {
     res.render('lawyers/signup');
 })
 
-// router.get('/appointments',authentication.ensureLogin,authorization)
+router.get('/appointments',authentication.ensureLogin,authorization.ensureLawyer,async (req,res,next) => {
+    try{
+        await req.user.populate('appointments').execPopulate();
+        res.render('lawyers/appointments',{user: req.user});
+    }catch(err){
+        next(err);
+    }
+})
 
 router.post('/signup',authentication.ensureNoLogin, upload.single('image'),lawyersController.signUp);
 
