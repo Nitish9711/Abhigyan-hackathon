@@ -27,8 +27,12 @@ router.get('/appointments',authentication.ensureLogin,authorization.ensureLawyer
         const appointments = [];
         for(const id of req.user.appointments){
             const x = await Appointment.findById(id);
-            appointments.push(x);
+            if(x) appointments.push(x);
         }
+        for(const appointment of appointments){
+            await appointment.populate('clientId').execPopulate();
+        }
+        console.log(appointments);
         res.render('lawyers/appointments',{user: req.user, appointments});
     }catch(err){
         next(err);
@@ -99,7 +103,7 @@ router.post('/search',authentication.ensureLogin,async (req,res) => {
     }
 })
 
-router.post('/:id',authentication.ensureLogin,find.findLawyer,authorization.ensureClient,async (req,res) => {
+router.post('/:id',authentication.ensureLogin,find.findLawyer,authorization.ensureClient,async (req,res,next) => {
     try{
         const appointment = new Appointment({
             lawyerId: req.params.id,
@@ -109,6 +113,18 @@ router.post('/:id',authentication.ensureLogin,find.findLawyer,authorization.ensu
         req.find.lawyer.appointments.push(appointment);
         await req.find.lawyer.save();
         res.redirect(`/lawyers/${req.params.id}`);
+    }catch(err){
+        next(err);
+    }
+})
+
+router.delete('/:id/:appointmentId',authentication.ensureLogin,authorization.ensureLawyer,find.findLawyer,async (req,res,next) => {
+    try{
+        const appointment = await Appointment.findById(req.params.appointmentId);
+        if(!appointment.lawyerId.equals(req.params.id)) throw Error('Unauthorized');
+        await appointment.delete();
+        await req.find.lawyer.update({$pull:{appointments: req.params.appointmentId}});
+        res.send(appointment);
     }catch(err){
         next(err);
     }
