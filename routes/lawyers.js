@@ -42,8 +42,8 @@ router.get('/dashboard',authentication.ensureLogin,(req,res) => {
     res.render('lawyers/dashboard',{user: req.user});
   })
 
-router.get('/:id',authentication.ensureLogin,find.findLawyer,(req,res) => {
-    res.render('lawyers/profile',{lawyer: req.find.lawyer});
+router.get('/:id',authentication.ensureLogin,find.findLawyer,authorization.identifyUserType,(req,res) => {
+    res.render('lawyers/profile',{lawyer: req.find.lawyer, user: req.user, type: req.find.type});
 })
 
 router.get('/',authentication.ensureLogin,(req,res) => {
