@@ -123,9 +123,8 @@ app.post('/logout',authentication.ensureLogin,(req,res) => {
   res.redirect('/');
 })
 
-
-
 app.get('/500', errorController.get500);
 app.use(errorController.get404);
+app.get('*', errorController.get500);
 
 module.exports = app;
