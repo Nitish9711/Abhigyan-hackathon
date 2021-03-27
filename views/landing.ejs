@@ -48,53 +48,20 @@
     <% } %> -->
 
     <header>
-      <div class="navbar-custom">
-        <div class="container">
-          <figure class="logo-img">
-            <a href="/"> <img src="/assets/logo.jpeg" style="opacity: 0.2;"></a>
-          </figure>
-          <div class="menu" id="menu">
-            <nav>
-              <ul>
-                <li><a href="/pricing">Pricing</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-              </ul>
-            </nav>
-            <p class="navbarTxt">
-              <!-- <a href="#">Sign In</a> | <a href="sign up.html">Register</a> -->
-              <% if(user){ %>
-                <% if(type==='client' ){ %>
-                  <a href="clients/dashboard">Dashboard |</a>
-                  <% }else{ %>
-                    <a href="lawyers/dashboard">Dashboard |</a>
-                    <% } %>
-                      <form action="/logout" method="POST">
-                        <button type="submit" >Logout</button>
-                      </form>
-                      <% }else{ %>
-
-                        <a href="/clients/login">Login as a client |</a>
-                        <a href="/lawyers/login">Login as a lawyer</a>
-
-                        <% } %>
-            </p>
-          </div>
-          <div class="menu-button" id="menu-button"></div>
-        </div>
-      </div>
-      <section class="hero">
-        <div class="container">
-          <div class="hero-text">
-            <h1>The perfect place for hiring lawyers and legal advisors</h1>
-            <div class="row ctaRow">
-              <div class="col-md">
-
-                <a href="/lawyers/signup"><button class="btn btn-secondary registerBtn">I am a lawyer</button></a>
-              </div>
-              <div class="col-md">
-
-                <a href="/clients/signup"><button class="schedule-button"> I want to hire</button></a>
+      <%- include('includes/nav.ejs') %>
+        <section class="hero">
+          <div class="container">
+            <div class="hero-text">
+              <h1>The perfect place for hiring lawyers and legal advisors</h1>
+              <div class="row ctaRow">
+                <div class="col-md">
+                   
+                    <a href="/lawyers/signup"><button class="btn btn-secondary registerBtn">I am a lawyer</button></a>
+                </div>
+                <div class="col-md">
+                   
+                    <a href="/clients/signup"><button class="schedule-button"> I want to hire</button></a>
+                </div>
               </div>
             </div>
             <small>

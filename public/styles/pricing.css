@@ -88,6 +88,8 @@ main {
     width: 40%;
 }
 
+
+
 @media screen and (max-width: 1040px) {
     body {
         background-position: calc(50% + 500px) -500px;
