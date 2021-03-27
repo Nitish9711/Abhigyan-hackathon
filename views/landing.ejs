@@ -73,12 +73,12 @@ crossorigin="anonymous"
                 <!-- <a href="#">Sign In</a> | <a href="sign up.html">Register</a> -->
                 <% if(user){ %>
                   <% if(type==='client'){ %>
-                    <a href="clients/dashboard">Dashboard</a>
+                    <a href="clients/dashboard">Dashboard |</a>
                   <% }else{ %>
-                    <a href="lawyers/dashboard">Dashboard</a>
+                    <a href="lawyers/dashboard">Dashboard |</a>
                   <% } %>
                     <form action="/logout" method="POST">
-                        <button>Logout</button>
+                        <a href="#">Logout</a>
                     </form>
                 <% }else{ %>
                 
