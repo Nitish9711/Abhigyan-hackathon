@@ -20,7 +20,7 @@ const authorization = require('./middleware/authorization');
 
 mongoose.Schema.Types.String.checkRequired(v => typeof v === 'string');
 
-const databaseUrl = "mongodb+srv://nitish_kumar:1234567890@cluster0.xt7ds.mongodb.net/abhigyan?retryWrites=true&w=majority";
+const databaseUrl = "mongodb+srv://nitish_kumar:1234567890@cluster0.xt7ds.mongodb.net/advoc?retryWrites=true&w=majority";
 mongoose
   .connect(
     databaseUrl, { useNewUrlParser: true, useUnifiedTopology: true }
