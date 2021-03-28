@@ -114,6 +114,12 @@ app.get('/contact',authorization.identifyUserType,(req,res) => {
 })
 
 
+app.use(authorization.identifyUserType,(req,res,next) => {
+  if(req.user){
+    res.locals.type = req.find.type;
+  }
+  next();
+});
 
 
 app.use('/clients',clientsRouter);
