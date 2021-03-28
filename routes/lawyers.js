@@ -8,8 +8,12 @@ const Lawyer = require("../models/Lawyer");
 const Appointment = require("../models/Appointment");
 const Client = require("../models/Client");
 const upload = require("../middleware/multer");
+const nodemailer = require('nodemailer')
+const config = require('../config.json')
+
 
 const lawyersController = require("../controllers/lawyers");
+const { getMaxListeners } = require("../models/Lawyer");
 
 router.get("/login", (req, res) => {
   res.render("lawyers/login");
@@ -207,18 +211,67 @@ router.post(
                 // console.log(lawyerDetails);
                 // console.log(email);
                 var mailList = [client["email"],lawyerDetails["email"]];
+                var clientName = client["name"]["first"] + " " + client["name"]["last"];
+                var lawyerName = lawyerDetails["name"]["first"] + " " + lawyerDetails["name"]["last"];
+                console.log(clientName);
                 console.log(mailList);
                 var date = req.body.date;
                 var time = req.body.time;
-                var meetLink = "https://adityaharsh2001.github.io/vc/"
-                
+                var meetLink = "https://adityaharsh2001.github.io/vc/";
+                const transporter = nodemailer.createTransport({
+                  host: 'smtp-mail.outlook.com',
+                  service: 'hotmail',
+                  secureConnection: false, 
+                  port: 587, // port for secure SMTP
+                  tls: {
+                    ciphers:'SSLv3'
+                  },
+                  auth: {
+                    user: config.fromMail, // Set this in environment var
+                    pass: config.pass, // Set this in environment var
+                  },
+                });
 
-                
-                
+                const mailOptions = {
+                  from: config.fromMail,
+                  to: ['parth1716@gmail.com', 'nitishkumar12c@gmail.com'],
+                  subject: "Your Advoc meeting",
+                  // Email body.
+                  // text: req.body.content,
+                  html: `<!DOCTYPE html>
+                  <html lang="en">
+                  <head>
+                      <meta charset="UTF-8">
+                      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                  </head>
+                  <body>
+                    <p>
+                      Thank you for choosing ADVOC, here is the link for the meeting booked by ` + clientName + ` with lawyer  `+ lawyerName + `  -  
+                    </p>
+                    <br>` + 
+                    meetLink +
+                  `</body>
+                  </html>`,
+                  attachments: [
+                    {
+                      filename: '',
+                      path: './public/assets/logo.jpeg'
+                    }
+                  ]
+                }
 
-
-
-                
+                transporter.sendMail(mailOptions, (error, info) => {
+                  if (error) {
+                    console.log(error);
+                    res
+                      .status(500)
+                      .send(`Something went wrong. Unable to send email\nERROR:\n${error}`);
+                    } else {
+                    console.log(`Email sent: ${info.response}`);
+                    // console.log(mailList);
+                  }
+                });  
               });
             })
            
