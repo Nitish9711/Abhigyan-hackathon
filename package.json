@@ -1,14 +1,22 @@
 {
-  "name": "abhigyan-hackathon",
+  "name": "haxplore-2.0-xterminate",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "temp",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nitish9711/haxplore-2.0-Xterminate.git"
   },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nitish9711/haxplore-2.0-Xterminate/issues"
+  },
+  "homepage": "https://github.com/Nitish9711/haxplore-2.0-Xterminate#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "chart.js": "^2.9.4",
@@ -23,8 +31,5 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.1.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
   }
 }

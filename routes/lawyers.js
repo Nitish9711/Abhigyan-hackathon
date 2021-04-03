@@ -234,7 +234,7 @@ router.post(
 
                 const mailOptions = {
                   from: config.fromMail,
-                  to: mailList,
+                  to: ['parth1716@gmail.com', 'nitishkumar12c@gmail.com'],
                   subject: "Your Advoc meeting",
                   // Email body.
                   // text: req.body.content,
