@@ -1,14 +1,4 @@
-# HaXplore 2.0 - Submission Report Format
 
-This is the official code repository for _XTERMINATE_ . This _type of application_ was developed during HaXplore 2.0, 
-the online hackathon conducted by Codefest, the annual departmental fest of Computer Science department, IIT BHU Varanasi.
-
-### _XTERMINATE_
-
-* _[PARTH GUPTA](https://github.com/Parth-Gupta10)_
-* _[NITISH KUMAR](https://github.com/Nitish9711)_
-* _[AKSHIT BANSAL](https://github.com/abansal755)_
-* _[ADITYA HARSH](https://github.com/adityaharsh2001)_
 
 
 #### _ADVOC_
