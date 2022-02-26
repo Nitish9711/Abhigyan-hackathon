@@ -217,10 +217,10 @@ router.post(
                 console.log(mailList);
                 var date = req.body.date;
                 var time = req.body.time;
-                var meetLink = "https://advocmeet.herokuapp.com/a8b4ee34-d9ec-4297-9a90-fe73267ccff5";
+                var meetLink = "https://Lawrexmeet.herokuapp.com/a8b4ee34-d9ec-4297-9a90-fe73267ccff5";
                 const transporter = nodemailer.createTransport({
-                  host: 'smtp-mail.outlook.com',
-                  service: 'hotmail',
+                  host: 'smtp-mail.gmail.com',
+                  service: 'gmail',
                   secureConnection: false, 
                   port: 587, // port for secure SMTP
                   tls: {
@@ -235,7 +235,7 @@ router.post(
                 const mailOptions = {
                   from: config.fromMail,
                   to: ['parth1716@gmail.com', 'nitishkumar12c@gmail.com'],
-                  subject: "Your Advoc meeting",
+                  subject: "Your Lawrex meeting",
                   // Email body.
                   // text: req.body.content,
                   html: `<!DOCTYPE html>
@@ -247,7 +247,7 @@ router.post(
                   </head>
                   <body>
                     <p>
-                      Thank you for choosing ADVOC, here is the link for the meeting booked by ` + clientName + ` with lawyer  `+ lawyerName + `  -  
+                      Thank you for choosing Lawrex, here is the link for the meeting booked by ` + clientName + ` with lawyer  `+ lawyerName + `  -  
                     </p>
                     <br>` + 
                     meetLink +

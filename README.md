@@ -1,12 +1,12 @@
 
 
 
-#### _ADVOC_
+#### _Lawrex_
 
 
 #### Overview
 
-_ADVOC is a web application which is used to connect users to top rated lawyers according to their budget and needs which will also help lawyers get more clients. Our objectives for this project are -_
+_Lawrex is a web application which is used to connect users to top rated lawyers according to their budget and needs which will also help lawyers get more clients. Our objectives for this project are -_
 
 - _Design an effective system where we can connect with lawyers easily._
 - _People who need legal advice can consult legal advisers online._
@@ -36,8 +36,8 @@ still working
 
 
 #### WEBSITE LINK
-1.  http://advoc-env.eba-rc3fxmmu.us-west-2.elasticbeanstalk.com/
-2.  https://advoc-lawyers.herokuapp.com/
+1.  http://Lawrex-env.eba-rc3fxmmu.us-west-2.elasticbeanstalk.com/
+2.  https://Lawrex-lawyers.herokuapp.com/
 
 #### Screenshots/Demo Video
 ![Home](assets/landing.jpeg)
