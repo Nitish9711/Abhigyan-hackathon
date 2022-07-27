@@ -31,12 +31,7 @@ _The following technologies will be used to make this application -_
 #### PPT LINK
 https://drive.google.com/file/d/10uIRYKlqtOHgCgjRiJH5ZL68vEmbI8f_/view
 
-#### demo video LINK
-still working
 
-
-#### WEBSITE LINK  
-1.  [Link](https://Lawrex-lawyers.herokuapp.com/)
 
 #### Screenshots/Demo Video
 ![Home](assets/landing.jpeg)
