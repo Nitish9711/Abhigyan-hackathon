@@ -1,12 +1,12 @@
 
 
 
-#### _Lawrex_
+#### _ADVOC_
 
 
 #### Overview
 
-_Lawrex is a web application which is used to connect users to top rated lawyers according to their budget and needs which will also help lawyers get more clients. Our objectives for this project are -_
+_ADVOC is a web application which is used to connect users to top rated lawyers according to their budget and needs which will also help lawyers get more clients. Our objectives for this project are -_
 
 - _Design an effective system where we can connect with lawyers easily._
 - _People who need legal advice can consult legal advisers online._
@@ -35,9 +35,8 @@ https://drive.google.com/file/d/10uIRYKlqtOHgCgjRiJH5ZL68vEmbI8f_/view
 still working
 
 
-#### WEBSITE LINK
-1.  http://Lawrex-env.eba-rc3fxmmu.us-west-2.elasticbeanstalk.com/
-2.  https://Lawrex-lawyers.herokuapp.com/
+#### WEBSITE LINK  
+1.  [Link](https://Lawrex-lawyers.herokuapp.com/)
 
 #### Screenshots/Demo Video
 ![Home](assets/landing.jpeg)
@@ -62,14 +61,6 @@ Follow these steps to run the application on your local machine -
 5. Open "localhost:3000" on your browser to use web application
 
 
-#### AWS Services Used
-
-_Write in brief about how you used AWS service to improve your application._
-1. AWS Elastic Beanstalk
-    We have used elastic beanstalk to host our node server as it easy-to-use service for deploying and scaling web applications and services.You can simply upload your code and Elastic Beanstalk automatically handles the deployment, from capacity provisioning, load balancing, auto-scaling to application health monitoring. At the same time, you retain full control over the AWS resources powering your application and can access the underlying resources at any time.
-
-2. AWS amazon lex
-   we have used this service for building our website chat bot. we impleted our bot with with lamda function.
 
 
 
